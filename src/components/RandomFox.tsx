@@ -1,10 +1,8 @@
 import Image from "next/image";
 
-const randomNumber = () => Math.floor(Math.random() * 122) + 1;
+type imageProps = { image: string };
 
-export function RandomFox(): JSX.Element {
-  const image = `https://randomfox.ca/images/${randomNumber()}.jpg`;
-
+export function RandomFox({ image }: imageProps): JSX.Element {
   return (
     <Image
       width={320}
