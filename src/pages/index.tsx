@@ -1,10 +1,11 @@
-
-import  {RandomFox}  from '@/components/RandomFox'
-import Head from 'next/head'
+import { useState } from "react";
+import { RandomFox } from "@/components/RandomFox";
+import Head from "next/head";
 
 const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
 export default function Home() {
+  const [images, setImages] = useState([]);
   return (
     <>
       <Head>
@@ -13,10 +14,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
-        <h1 className="text-3xl font-bold underline">Republica Dominicana Campeón</h1>
-        <RandomFox image={`https://randomfox.ca/images/${randomNumber()}.jpg`}/>
+      <main>
+        <h1 className="text-3xl font-bold underline">
+          Republica Dominicana Campeón
+        </h1>
+        <RandomFox
+          image={`https://randomfox.ca/images/${randomNumber()}.jpg`}
+        />
       </main>
     </>
-  )
+  );
 }
