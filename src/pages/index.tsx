@@ -5,7 +5,11 @@ import Head from "next/head";
 const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
 export default function Home() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<string[]>([
+    `https://randomfox.ca/images/${randomNumber()}.jpg`,
+    `https://randomfox.ca/images/${randomNumber()}.jpg`,
+    `https://randomfox.ca/images/${randomNumber()}.jpg`,
+  ]);
   return (
     <>
       <Head>
@@ -18,9 +22,11 @@ export default function Home() {
         <h1 className="text-3xl font-bold underline">
           Republica Dominicana Campeón
         </h1>
-        <RandomFox
-          image={`https://randomfox.ca/images/${randomNumber()}.jpg`}
-        />
+        {images.map((img, index) => (
+          <div className="p-4" key={index}>
+            <RandomFox image={img} />
+          </div>
+        ))}
       </main>
     </>
   );
