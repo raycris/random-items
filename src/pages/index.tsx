@@ -2,13 +2,19 @@ import { useState } from "react";
 import { RandomFox } from "@/components/RandomFox";
 import Head from "next/head";
 
+type ImageItems = {id: string, url: string}
+
 const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
+// generate simple unique id
+const generateId = () => Math.random().toString(36).substr(2,9)
+
 export default function Home() {
-  const [images, setImages] = useState<string[]>([
-    `https://randomfox.ca/images/${randomNumber()}.jpg`,
-    `https://randomfox.ca/images/${randomNumber()}.jpg`,
-    `https://randomfox.ca/images/${randomNumber()}.jpg`,
+  const [images, setImages] = useState<Array <ImageItems>>([
+    {id: generateId(), url:`https://randomfox.ca/images/${randomNumber()}.jpg`},
+    {id: generateId(), url:`https://randomfox.ca/images/${randomNumber()}.jpg`},
+    {id: generateId(), url:`https://randomfox.ca/images/${randomNumber()}.jpg`},
+    {id: generateId(), url:`https://randomfox.ca/images/${randomNumber()}.jpg`},
   ]);
   return (
     <>
@@ -22,9 +28,9 @@ export default function Home() {
         <h1 className="text-3xl font-bold underline">
           Republica Dominicana Campeón
         </h1>
-        {images.map((img, index) => (
-          <div className="p-4" key={index}>
-            <RandomFox image={img} />
+        {images.map((item) => (
+          <div className="p-4" key={item.id}>
+            <RandomFox image={item.url} />
           </div>
         ))}
       </main>
