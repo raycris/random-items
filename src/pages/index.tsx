@@ -7,7 +7,7 @@ type ImageItems = {id: string, url: string}
 const randomNumber = () => Math.floor(Math.random() * 122) + 1;
 
 // generate simple unique id
-const generateId = () => Math.random().toString(36).substr(2,9)
+const generateId = () => Math.random().toString(36).substring(2,9)
 
 export default function Home() {
   const [images, setImages] = useState<Array <ImageItems>>([
