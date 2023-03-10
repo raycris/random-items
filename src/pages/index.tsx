@@ -1,19 +1,21 @@
 import { MouseEventHandler, useState } from "react";
+
 import { Lazyimage } from "@/components/Lazyimage";
+
 import Head from "next/head";
 
-type ImageItems = { id: string; url: string };
+import { random } from "lodash";
 
-const randomNumber = () => Math.floor(Math.random() * 122) + 1;
+const randomNumber = () => random(1, 123);
 
 // generate simple unique id
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
 export default function Home() {
-  const [images, setImages] = useState<Array<ImageItems>>([]);
+  const [images, setImages] = useState<Array<IFoxImageItems>>([]);
 
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
-    const newImageItem: ImageItems = {
+    const newImageItem: IFoxImageItems = {
       id: generateId(),
       url: `https://randomfox.ca/images/${randomNumber()}.jpg`,
     };
@@ -41,8 +43,9 @@ export default function Home() {
               height={320}
               className="mx-auto rounded-md bg-gray-300"
               onClick={() => console.log("loco")}
-              onLazyLoad={(img => {console.log(`Image #${index + 1} cargada. Nodo:`, img)
-              })}
+              onLazyLoad={(img) => {
+                console.log(`Image #${index + 1} cargada. Nodo:`, img);
+              }}
             />
           </div>
         ))}
