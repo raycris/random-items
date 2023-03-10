@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from "react";
-import { Lazyimage } from "@/components/RandomFox";
+import { Lazyimage } from "@/components/Lazyimage";
 import Head from "next/head";
 
 type ImageItems = { id: string; url: string };
@@ -33,9 +33,17 @@ export default function Home() {
           Republica Dominicana Campeón
         </h1>
         <button onClick={addNewFox}>Add new Fox</button>
-        {images.map((item) => (
+        {images.map((item, index) => (
           <div className="p-4" key={item.id}>
-            <Lazyimage image={item.url} />
+            <Lazyimage
+              src={item.url}
+              width={320}
+              height={320}
+              className="mx-auto rounded-md bg-gray-300"
+              onClick={() => console.log("loco")}
+              onLazyLoad={(img => {console.log(`Image #${index + 1} cargada. Nodo:`, img)
+              })}
+            />
           </div>
         ))}
       </main>
