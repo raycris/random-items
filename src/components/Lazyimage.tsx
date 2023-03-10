@@ -26,27 +26,31 @@ export function Lazyimage({
     if (isLazyLoaded) {
       return;
     }
-    // Nuevo observador
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting || !node.current) {
           return;
         }
+
+        setCurrentSrc(src);
+        observer.disconnect();
+        setIsLazyLoaded(true);
+
+        if (typeof onLazyLoad === "function") {
+          onLazyLoad(node.current);
+        }
       });
     });
 
-    setCurrentSrc(src);
-    observer.disconnect();
-    setIsLazyLoaded(true);
-
-    if (typeof onLazyLoad === "function") {
-      onLazyLoad(node.current);
+    if (node.current) {
+      observer.observe(node.current);
     }
 
     return () => {
       observer.disconnect();
     };
-  }, [isLazyLoaded, onLazyLoad, src]);
+  }, [src, onLazyLoad, isLazyLoaded]);
 
   return <Image ref={node} src={currentSrc} alt="Fox" {...imgProps} />;
 }
