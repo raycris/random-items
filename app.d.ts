@@ -1,1 +1,1 @@
-type IFoxImageItems = { id: string; url: string };
+export type IFoxImageItems = { id: string; url: string };
