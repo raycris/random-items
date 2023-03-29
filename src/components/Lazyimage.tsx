@@ -1,8 +1,13 @@
 import { ImgHTMLAttributes, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+type PlaceholderValue = "blur" | "empty";
+
 type LazyImageProps = {
   src: string;
+  width: number;
+  height: number;
+  placeholder?: PlaceholderValue;
   onLazyLoad?: (img: HTMLImageElement) => void;
 };
 
